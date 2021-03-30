@@ -13,17 +13,20 @@ postsRouter.get('/', (request, response) => {
 });
 
 postsRouter.post('/', upload.single('image'), async (request, response) => {
-    const { title, content, reading_time } = request.body;
+    const { user_id, title, content, reading_time } = request.body;
     const { filename } = request.file;
 
     const createPostService = new CreatePostService();
 
     const post = await createPostService.execute({
+        user_id,
         title,
         content,
         reading_time,
         filename
     });
+
+    delete post.user.password;
 
     return response.json(post);
 });
