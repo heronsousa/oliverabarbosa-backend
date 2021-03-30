@@ -12,6 +12,9 @@ class Post {
     content: string;
 
     @Column()
+    image: string;
+
+    @Column()
     reading_time: number;
 
     @CreateDateColumn()

@@ -6,16 +6,18 @@ interface Request {
     title: string;
     content: string;
     reading_time: number;
+    filename: string;
 }
 
 class CreatePostService {
-    public async execute({ title, content, reading_time }: Request): Promise<Post> {
+    public async execute({ title, content, reading_time, filename }: Request): Promise<Post> {
         const postsRepository = getRepository(Post);
 
         const post = postsRepository.create({
             title,
             content,
-            reading_time
+            reading_time,
+            image: filename
         });
 
         await postsRepository.save(post);
